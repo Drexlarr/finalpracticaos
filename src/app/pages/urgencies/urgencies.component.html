@@ -1,0 +1,73 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Students</mat-card-title>
+    <mat-card-subtitle>{{ isEditMode ? 'Edit Student' : 'Add new Student' }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-grid-list cols="2" rowHeight="100px">
+      <mat-grid-tile>
+        <form (submit)="onSubmit()" #urgencyForm="ngForm">
+          <mat-form-field>
+            <input matInput placeholder="Title" name="title" required [(ngModel)]="urgencyData.title">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Summary" name="summary" [(ngModel)]="urgencyData.summary">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Latitude" name="latitude" type="number" required [(ngModel)]="urgencyData.latitude">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Longitude" name="longitude" type="number" required [(ngModel)]="urgencyData.longitude">
+          </mat-form-field>
+          <ng-container *ngIf="isEditMode; else elseTemplate">
+            <button mat-button color="primary" class="mat-button-text">Update</button>
+            <button mat-button class="mat-button-text" color="warn" (click)="cancelEdit()">Cancel</button>
+          </ng-container>
+          <ng-template #elseTemplate>
+            <button mat-button color="primary" class="mat-button-text">Add</button>
+          </ng-template>
+        </form>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-label>Filter</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ex.John Doe" #input>
+          <mat-icon *ngIf="isFiltering" matSuffix>search</mat-icon>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+        <td mat-cell *matCellDef="let element"> {{ element.id }}</td>
+      </ng-container>
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+        <td mat-cell *matCellDef="let element"> {{ element.title }}</td>
+      </ng-container>
+      <ng-container matColumnDef="summary">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Summary </th>
+        <td mat-cell *matCellDef="let element"> {{ element.summary }}</td>
+      </ng-container>
+      <ng-container matColumnDef="latitude">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Latitude </th>
+        <td mat-cell *matCellDef="let element"> {{ element.latitude }}</td>
+      </ng-container>
+      <ng-container matColumnDef="longitude">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Longitude </th>
+        <td mat-cell *matCellDef="let element"> {{ element.longitude }}</td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+          <a href="javascript:void(0)"  (click)="editItem(element)"><mat-icon inline aria-hidden="false" aria-label="Edit" style="padding-right: 10px;">edit</mat-icon></a>
+          <a href="javascript:void(0)" (click)="deleteItem(element.id)"><mat-icon inline aria-hidden="false" aria-label="Delete">delete</mat-icon></a>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+          [ngClass]="{'editable-row': urgencyData.id === row.id}"></tr>
+    </table>
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+  </mat-card-content>
+</mat-card>

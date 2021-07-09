@@ -1,0 +1,42 @@
+{
+  "guardians": [
+    {
+      "id": 1,
+      "username": "Drexlar",
+      "email": "drexlar@gmail.com",
+      "firstName": "Diego",
+      "lastName": "Bazan",
+      "gender": "Masculino",
+      "address": "The Next Location."
+    }
+  ],
+  "urgencies": [
+    {
+      "title": "Me banearon y no uso hacks",
+      "summary": "Xander tiene un amigo y  su amigo me mató ps",
+      "latitude": 171.12345,
+      "longitude": 174.12345,
+      "guardianId": "1",
+      "reportedAt": "2021-07-09T08:23:33.913Z",
+      "id": 1
+    },
+    {
+      "title": "Estoy bien",
+      "summary": "Comí mucho y F",
+      "latitude": 172.12345,
+      "longitude": 174.12345,
+      "guardianId": "1",
+      "reportedAt": "2021-07-09T08:27:09.498Z",
+      "id": 2
+    },
+    {
+      "title": "Me banearon y no uso hacks",
+      "summary": "Comí mucho y F",
+      "latitude": 17.12345,
+      "longitude": 174.12345,
+      "guardianId": "1",
+      "reportedAt": "2021-07-09T08:31:20.916Z",
+      "id": 3
+    }
+  ]
+}

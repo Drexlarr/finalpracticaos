@@ -1,0 +1,8 @@
+.default-spacer {
+  flex: 1 1 auto;
+}
+
+.nav-buttons{
+  display: flex;
+  align-content: end;
+}
